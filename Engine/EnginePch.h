@@ -58,6 +58,9 @@ struct WindowInfo  //출력 윈도우 정보
 
 };
 
+#define DEVICE		GEngine->GetDevice()->GetDevice()
+#define CMD_LIST		GEngine->GetCmdQueue()->GetCmdList()
+
 //extern : 아직은 모르겠지만 이런걸 쓸거야
 //함수 밖의 전역 범위에 선언되며, 프로그램 전체에서 유효하고 다른 파일에서도 참조 가능
 //초기화를 생략하면 0으로 자동 초기화
