@@ -37,7 +37,8 @@ VS_OUT VS_Main(VS_IN input)
     //input으로 들어온 3가지의 값(float3)은 그대로 넣어주고, 마지막 값만 1로 채워서
     //output.pos에 넣어줘라.
     output.pos = float4(input.pos, 1.f);
-    output.pos += offset0;
+    output.pos += offset0; 
+    
     output.color = input.color;
     output.color += offset1;
 
