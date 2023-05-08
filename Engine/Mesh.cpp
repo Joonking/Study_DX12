@@ -42,5 +42,9 @@ void Mesh::Render()
 {
 	CMD_LIST->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	CMD_LIST->IASetVertexBuffers(0, 1, &_vertexBufferView); // Slot: (0~15)
+
+	//TODO: 
+	// CMD_LIST->SetComputeRootConstantBufferView(0, );
+
 	CMD_LIST->DrawInstanced(_vertexCount, 1, 0, 0);
 }
