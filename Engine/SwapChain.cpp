@@ -4,10 +4,8 @@
 
 void SwapChain::Init(const WindowInfo& info, ComPtr<ID3D12Device> device, ComPtr<IDXGIFactory> dxgi, ComPtr<ID3D12CommandQueue> cmdQueue)
 {
-	
 	CreateSwapChain(info, dxgi, cmdQueue);
 	CreateRTV(device);
-
 }
 
 void SwapChain::Present()
@@ -18,7 +16,6 @@ void SwapChain::Present()
 
 void SwapChain::SwapIndex()
 {
-	//0, 1 계속 스왑해주는 작업
 	_backBufferIndex = (_backBufferIndex + 1) % SWAP_CHAIN_BUFFER_COUNT;
 }
 

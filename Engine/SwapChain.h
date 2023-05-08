@@ -1,5 +1,6 @@
 #pragma once
 
+
 // 교환 사슬
 // [외주 과정]
 // - 현재 게임 세상에 있는 상황을 묘사
@@ -32,7 +33,6 @@ public:
 	ComPtr<ID3D12Resource> GetRenderTarget(int32 index) { return _rtvBuffer[index]; }
 
 	ComPtr<ID3D12Resource> GetBackRTVBuffer() { return _rtvBuffer[_backBufferIndex]; }
-
 	D3D12_CPU_DESCRIPTOR_HANDLE GetBackRTV() { return _rtvHandle[_backBufferIndex]; }
 
 private:
@@ -42,10 +42,10 @@ private:
 private:
 	ComPtr<IDXGISwapChain>	_swapChain;
 
-	ComPtr<ID3D12Resource>					_rtvBuffer[SWAP_CHAIN_BUFFER_COUNT];  
-	ComPtr<ID3D12DescriptorHeap>			_rtvHeap;
+	ComPtr<ID3D12Resource>			_rtvBuffer[SWAP_CHAIN_BUFFER_COUNT];
+	ComPtr<ID3D12DescriptorHeap>	_rtvHeap;
 	D3D12_CPU_DESCRIPTOR_HANDLE		_rtvHandle[SWAP_CHAIN_BUFFER_COUNT];
 
-	uint32							_backBufferIndex = 0;
+	uint32					_backBufferIndex = 0;
 };
 

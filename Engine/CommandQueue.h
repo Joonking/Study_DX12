@@ -3,21 +3,19 @@
 class SwapChain;
 class DescriptorHeap;
 
-//외주 보낼것들을 모아서 한번에 보내기 위해서 큐로 넣어주는거임. 
 class CommandQueue
 {
 public:
 	~CommandQueue();
 
 	void Init(ComPtr<ID3D12Device> device, shared_ptr<SwapChain> swapChain);
-	void WaitSync();   //Fence를 이용해 기다려 주는 함수
+	void WaitSync();
 
-	//실질 적으로 게임이 그려지는 함수
 	void RenderBegin(const D3D12_VIEWPORT* vp, const D3D12_RECT* rect);
 	void RenderEnd();
 
 	ComPtr<ID3D12CommandQueue> GetCmdQueue() { return _cmdQueue; }
-	ComPtr<ID3D12GraphicsCommandList> GetCmdList() { return _cmdList; }
+	ComPtr<ID3D12GraphicsCommandList> GetCmdList() { return	_cmdList; }
 
 private:
 	// CommandQueue : DX12에 등장
@@ -25,14 +23,14 @@ private:
 	// [외주 목록]에 일감을 차곡차곡 기록했다가 한 방에 요청하는 것
 	ComPtr<ID3D12CommandQueue>			_cmdQueue;
 	ComPtr<ID3D12CommandAllocator>		_cmdAlloc;
-	ComPtr<ID3D12GraphicsCommandList>		_cmdList;
+	ComPtr<ID3D12GraphicsCommandList>	_cmdList;
 
 	// Fence : 울타리(?)
 	// CPU / GPU 동기화를 위한 간단한 도구
 	ComPtr<ID3D12Fence>					_fence;
-	uint32										_fenceValue = 0;
-	HANDLE										_fenceEvent = INVALID_HANDLE_VALUE;
+	uint32								_fenceValue = 0;
+	HANDLE								_fenceEvent = INVALID_HANDLE_VALUE;
 
-	shared_ptr<SwapChain>					_swapChain;
+	shared_ptr<SwapChain>		_swapChain;
 };
 

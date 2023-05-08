@@ -2,7 +2,6 @@
 #include "CommandQueue.h"
 #include "SwapChain.h"
 
-
 CommandQueue::~CommandQueue()
 {
 	::CloseHandle(_fenceEvent);
@@ -11,7 +10,6 @@ CommandQueue::~CommandQueue()
 void CommandQueue::Init(ComPtr<ID3D12Device> device, shared_ptr<SwapChain> swapChain)
 {
 	_swapChain = swapChain;
-
 
 	D3D12_COMMAND_QUEUE_DESC queueDesc = {};
 	queueDesc.Type = D3D12_COMMAND_LIST_TYPE_DIRECT;
