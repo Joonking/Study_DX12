@@ -9,15 +9,25 @@
   + Index Buffer
   + Texture Mapping
   + Depth Stencil View
+
 ### 2. Component
-3. Vector & Matrix
-4. Camera & Lighting
-5. Quaternion
-6. Rendering
-7. Particle
-8. Shadow Mapping
-9. Terrain
-10. Mesh & Animation
-11. TEMP : 리뉴얼 강의 저장소
+
+### 3. Vector & Matrix
+
+### 4. Camera & Lighting
+
+### 5. Quaternion
+
+### 6. Rendering
+
+### 7. Particle
+
+### 8. Shadow Mapping
+
+### 9. Terrain
+
+### 10. Mesh & Animation
+
+### 11. TEMP : 리뉴얼 강의 저장소
 
 
