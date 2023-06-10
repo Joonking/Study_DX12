@@ -57,6 +57,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     {
         if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
         {
+            //프로그램 종료시 while문 빠져나가도록
             if (msg.message == WM_QUIT)
                 break;
 
@@ -67,7 +68,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			}
         }
 
-		// TODO
+		// 메시지가 있던 없던 이쪽으로 들어와서 게임이 계속 업데이트 되도록
         game->Update();
     }
 
