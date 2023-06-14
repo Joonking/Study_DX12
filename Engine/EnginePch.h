@@ -48,7 +48,7 @@ enum
 	SWAP_CHAIN_BUFFER_COUNT = 2
 };
 
-struct WindowInfo
+struct WindowInfo			//윈도우 창 관련 정보들 
 {
 	HWND	hwnd; // 출력 윈도우
 	int32	width; // 너비
