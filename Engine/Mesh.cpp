@@ -44,7 +44,10 @@ void Mesh::Render()
 	CMD_LIST->IASetVertexBuffers(0, 1, &_vertexBufferView); // Slot: (0~15)
 
 	//TODO: 
-	// CMD_LIST->SetComputeRootConstantBufferView(0, );
+	//1. Buffer에다가 데이터 세팅
+	//2. BUffer의 주소를 register 에다가 전송.
+	GEngine->GetCB()->PushData(0, &_transform, sizeof(_transform));
+	GEngine->GetCB()->PushData(1, &_transform, sizeof(_transform));
 
 	CMD_LIST->DrawInstanced(_vertexCount, 1, 0, 0);
 }

@@ -193,13 +193,26 @@ Shader 클래스
 
 1.4 Constant Buffer ---------------------------------------------------------------------------------------------------------------------
 
+쉐이더 default.hlsli 가 GPU에게 보내주는 외주 일감이라고 했었음.
+이번에는 VS_Main 에서 좌표값과 칼라값을 변화시켜볼거임.
+
+RootSignature 에서 서명해서 GPU의 메모리를 사용할 수 있음.
+GPU의 레지스터를 사용하려면 어떤 정책에 서명을 해줘야함.
 
 
+CommandQueue의 랜더링을 시작하는 RenderBegin 부분에서
+어떤 정책으로 어떤 건물을 임대하겠다 하는 서명을 해줄거임.
+	_cmdList->SetGraphicsRootSignature(ROOT_SIGNATURE.Get());
+	이러한 서명을 활용하겠다는 선포
 
+RootSignature에서 생성한 서명은 ~~ 한 것들을 사용하겠다라는거임
+실질적인 데이터를 넣는 작업은 Mesh의 Render 함수에서 일어남.
 
-
-
-
+Mesh의 
+Device를 통해서 이루어지는 애들은 CommandQueue를 이용해서
+나중에 이루어지는게 아닌 지금 당장 일어나는거임. 
+반면에 CMD_LIST에서 작업하는거는 예약만 하는거는 
+나중에 execute를 할때 한번에 일어남.
 
 
 

@@ -3,7 +3,7 @@
 
 void RootSignature::Init(ComPtr<ID3D12Device> device)
 {
-	CD3DX12_ROOT_PARAMETER param[2];
+	CD3DX12_ROOT_PARAMETER param[2];		//2개의 파라미터를 만들어서 
 	param[0].InitAsConstantBufferView(0);		//0번 -> b0  ->CBV를 이용할거임.
 	param[1].InitAsConstantBufferView(1);		//1번 -> b1  ->CBV
 
