@@ -64,6 +64,7 @@ Engine 클래스
 		shared_ptr<CommandQueue>		_cmdQueue;
 		shared_ptr<SwapChain>				_swapChain;
 		shared_ptr<RootSignature>			_rootSignature;
+	
 	이 변수들은 엔진의 Init 함수에서 make_shared<클래스명>() 으로 객체를 생성해줌.
 	그리고 각각의 객체의 Init 함수를 호출해줌. 
 
@@ -71,19 +72,80 @@ Engine 클래스
 Device 클래스
 	인력사무소 느낌임. 각종 객체를 생성하는 걸 담당.
 
-	ComPtr
+
+	ComPtr	
+		COM(Component Object Model) 을 사용할 수 있게 해주는 포인터
+
+		D3D12CreateDevice 함수 
+			그래픽 카드를 나타내는 객체를 생성 _device 에다가
+			그래픽 카드에 어떠한 기능을 요청할때 _device를 통해 요청함.
+
+		_dxgi 는 화면과 관련된 기능을 담당함.
+
+		_dxgi와 _device는 인력사무소의 대표들이다 라고 생각하면됨.
 
 
 
 CommandQueue 클래스
 
+	GPU에게 외주를 줄건데 예전에는 _device를 통해 요청하면되는데
+	dx12부터는 외주를 줄때 CommanQueue를 사용해서 줘야함.
+
+	CommandQueue에다가 외주 줄것들을 모아서 주는 개념임.
+
+	외주를 준 작업이 끝나고 작업 결과물을 받은 다음에 작업을 처리해야하는
+	경우가 생길 수 있음. 그럴때 사용하는게 _fence 임. (울타리)
+
+	울타리를 쳐서 외주 작업을 기다리는 개념.
+
+	Init 함수는 초기화할때 사용
+	WaitSync 는 울타리 쳐서 기다리는 함수
+
+
+
 SwapChain 클래스
 
-RootSignature 클래스
+	교환 사슬
+		[외주 과정]
+			- 현재 게임 세상에 있는 상황을 묘사
+			- 어떤 공식으로 어떻게 계산할지 던져줌
+			- GPU가 열심히 계산 (외주)
+			- 결과물 받아서 화면에 그려준다
+
+		[외주 결과물]을 어디에 받지?
+			- 어떤 종이(Buffer)에 그려서 건내달라고 부탁해보자
+			- 특수 종이를 만들어서 -> 처음에 건내주고 -> 결과물을 해당 종이에 받는다 OK
+			- 우리 화면에 특수 종이(외주 결과물) 출력해준다
+
+		[?]
+			- 그런데 화면에 현재 결과물 출력하는 와중에, 다음 화면도 외주를 맡겨야 함
+			- 현재 화면 결과물은 이미 화면 출력에 사용중
+			- 특수 종이를 2개 만들어서, 하나는 현재 화면을 그려주고, 하나는 외주 맡기고...
+			- Double Buffering!
+			
+		[0] [1]
+			현재 화면 [0]  <-> GPU 작업중 [1] BackBuffer
 
 
+엔진의 Render() 함수 : RenderBegin, RenderEnd 호출 
+	
+	RenderBegin() : CommandQueue 에다가 요청 사항들을 넣어주는것
+		_cmdQueue->RenderBegin(&_viewport, &_scissorRect);
+
+	RenderEnd() :  쌓은 일감들을 GPU에게 외주를 맡겨서 실질적인 모든 일감을 실행.
+		_cmdQueue->RenderEnd();
 
 
+CommandQueue의 RenderBegin 함수
+	SwapChain 에서 그려질 화면을
+	[0] [1]		(그려질 화면 0, 1)
+			현재 화면 [0]  <-> GPU 작업중 [1] BackBuffer
+	이런식으로 번갈아가면서 화면이 그려지는데
+	이 작업을 RenderBegin에서 해줌. 
+	GPU에게 BackBuffer로 외주를 요청
+
+CommandQueue의 RenderEnd 함수
+	GPU에서 작업한 [1] 작업 결과물을 [0] 과 교체해주는 작업을 함.
 
 
 1.3 삼각형 띄우기 -----------------------------------------------------------------------------------------------------------------------

@@ -23,7 +23,7 @@ private:
 	// [외주 목록]에 일감을 차곡차곡 기록했다가 한 방에 요청하는 것
 	ComPtr<ID3D12CommandQueue>			_cmdQueue;
 	ComPtr<ID3D12CommandAllocator>		_cmdAlloc;
-	ComPtr<ID3D12GraphicsCommandList>	_cmdList;
+	ComPtr<ID3D12GraphicsCommandList>		_cmdList;
 
 	// Fence : 울타리(?)
 	// CPU / GPU 동기화를 위한 간단한 도구
