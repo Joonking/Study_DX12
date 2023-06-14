@@ -215,6 +215,28 @@ Device를 통해서 이루어지는 애들은 CommandQueue를 이용해서
 나중에 execute를 할때 한번에 일어남.
 
 
+1.5 Root Signature ---------------------------------------------------------------------------------------------------------------------
+
+전 시간에는 RootSignature 안에 파라미터 값 CBV 값을 이용했다면
+
+이번에는 desciptor table을 이용하는 방식으로 서명을 해볼거임.
+
+RootSignature는 64 DWORD가 리미트임.
+
+그래서 용량이 모자라면 테이블을 사용하면됨.
+
+RootSignature 겍체를 이용해서 GPU의 레지스터에 테이블을 만들거임.
+이 테이블에 b0,b1,b2,b3,b4 이런식으로 사용할 파라미터를 정해주는데
+
+이때 레지스터로 어떻게 올리느냐 
+SetDescriptorHeaps
+SetGraphicsRootDescriptorTable 을 이용함.
+
+
+
+
+
+
 
 2. Component ==========================================
 

@@ -3,11 +3,15 @@
 
 void RootSignature::Init(ComPtr<ID3D12Device> device)
 {
-	CD3DX12_ROOT_PARAMETER param[2];		//2개의 파라미터를 만들어서 
-	param[0].InitAsConstantBufferView(0);		//0번 -> b0  ->CBV를 이용할거임.
-	param[1].InitAsConstantBufferView(1);		//1번 -> b1  ->CBV
+	CD3DX12_DESCRIPTOR_RANGE ranges[] =
+	{
+		CD3DX12_DESCRIPTOR_RANGE(D3D12_DESCRIPTOR_RANGE_TYPE_CBV, CBV_REGISTER_COUNT, 0), // b0~b4
+	};
 
-	D3D12_ROOT_SIGNATURE_DESC sigDesc = CD3DX12_ROOT_SIGNATURE_DESC(2, param);
+	CD3DX12_ROOT_PARAMETER param[1];
+	param[0].InitAsDescriptorTable(_countof(ranges), ranges);
+
+	D3D12_ROOT_SIGNATURE_DESC sigDesc = CD3DX12_ROOT_SIGNATURE_DESC(_countof(param), param);
 	sigDesc.Flags = D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT; // 입력 조립기 단계
 
 	ComPtr<ID3DBlob> blobSignature;
@@ -15,3 +19,16 @@ void RootSignature::Init(ComPtr<ID3D12Device> device)
 	::D3D12SerializeRootSignature(&sigDesc, D3D_ROOT_SIGNATURE_VERSION_1, &blobSignature, &blobError);
 	device->CreateRootSignature(0, blobSignature->GetBufferPointer(), blobSignature->GetBufferSize(), IID_PPV_ARGS(&_signature));
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
