@@ -150,11 +150,43 @@ CommandQueue의 RenderEnd 함수
 
 1.3 삼각형 띄우기 -----------------------------------------------------------------------------------------------------------------------
 
+RootSignature 클래스
+	계약서, 결재 같은 개념임.
+	CPU에서 GPU로 외주를 맡기는데
+	어떤것을 사용하겠다 라는 서명이라는 절차를 거침.
+	어떠한 버퍼, 레지스터를 사용하겠다는 것을 명시해주는거임. 
 
 
+Mesh 클래스
+	정점으로 이루어진 물체
+	리소스와 view 를 가지고 있어야함.
+
+	Init 함수에서 그릴 정점들을 vector 매개변수로 받아올거임.
+	Vertex 자료형은 EnginePch.h에서 정의함. 
+	struct Vertex
+	{
+		Vec3 pos;
+		Vec4 color;
+	};
+	3차원 공간이라 Vec3은 x,y,z 좌표를 표현
+	Vec4 는 색상정보를 가지게끔.
+
+	GPU쪽 메모리에 그릴 데이터들을 복사해줘야함.
+	CreateCommittedResource 함수로 GPU에 사용할 공간을 할당 받음.
+	
+	버퍼사이즈 만큼의 버퍼를 만들고
+	어떤 용도로 사용할지를 정해주고 (D3D12_HEAP_TYPE_UPLOAD)
+
+	_vertexBuffer는 사실상 ram에 있는게 아니고 gpu의 메모리를 가리킴.
+	여기에 값을 넣을때는 두단계에 걸쳐 데이터를 넣음.
+
+	_vertexBuffer->Map(0, &readRange, &vertexDataBuffer);	vertexDataBuffer를 통해서 잠시나마 gpu의 메모리 공간에 복사를 함.
+	::memcpy(vertexDataBuffer, &vec[0], bufferSize);
+	_vertexBuffer->Unmap(0, nullptr);		뚜껑을 닫아주기
 
 
-
+Shader 클래스
+	[일감 기술서] 외주 인력들이 뭘 해야할지 기술
 
 
 
