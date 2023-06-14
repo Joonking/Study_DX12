@@ -4,7 +4,7 @@
   + 프로젝트 설정 :white_check_mark:
   + 장치 초기화 :white_check_mark:
   + 삼각형 띄우기 :white_check_mark:
-  + Constant Buffer
+  + Constant Buffer :white_check_mark:
   + Root Signature
   + Index Buffer
   + Texture Mapping
