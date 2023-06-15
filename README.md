@@ -5,7 +5,7 @@
   + 장치 초기화 :white_check_mark:
   + 삼각형 띄우기 :white_check_mark:
   + Constant Buffer :white_check_mark:
-  + Root Signature :white_check_mark:
+  + Root Signature
   + Index Buffer
   + Texture Mapping
   + Depth Stencil View
