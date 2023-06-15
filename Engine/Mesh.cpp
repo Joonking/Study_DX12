@@ -23,7 +23,7 @@ void Mesh::Init(vector<Vertex>& vec)
 	CD3DX12_RANGE readRange(0, 0); // We do not intend to read from this resource on the CPU.
 	_vertexBuffer->Map(0, &readRange, &vertexDataBuffer);
 	::memcpy(vertexDataBuffer, &vec[0], bufferSize);
-	_vertexBuffer->Unmap(0, nullptr);
+	_vertexBuffer->Unmap(0, nullptr); 
 
 	// Initialize the vertex buffer view.
 	_vertexBufferView.BufferLocation = _vertexBuffer->GetGPUVirtualAddress();
