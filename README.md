@@ -1,4 +1,4 @@
-## 인프런 Rookiss 강의 DirectX12 (7/41)
+## 인프런 Rookiss 강의 DirectX12 (8/41)
 
 ### 1. DirectX12 초기화
   + 프로젝트 설정 :white_check_mark:
@@ -8,7 +8,7 @@
   + Root Signature :white_check_mark:
   + Index Buffer :white_check_mark:
   + Texture Mapping :white_check_mark:
-  + Depth Stencil View
+  + Depth Stencil View :white_check_mark:
 
 ### 2. Component
   + Input과 Timer
