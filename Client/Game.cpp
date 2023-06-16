@@ -9,19 +9,48 @@ void Game::Init(const WindowInfo& info)
 {
 	GEngine->Init(info);
 
-	//삼각형 정점 설정
-	vector<Vertex> vec(3);
-	vec[0].pos = Vec3(0.f, 0.5f, 0.5f);
+	/*vector<Vertex> vec(6);
+	vec[0].pos = Vec3(-0.5f, 0.5f, 0.5f);
 	vec[0].color = Vec4(1.f, 0.f, 0.f, 1.f);
-	vec[1].pos = Vec3(0.5f, -0.5f, 0.5f);
-	vec[1].color = Vec4(0.f, 1.0f, 0.f, 1.f);
-	vec[2].pos = Vec3(-0.5f, -0.5f, 0.5f);
+	vec[1].pos = Vec3(0.5f, 0.5f, 0.5f);
+	vec[1].color = Vec4(0.f, 1.f, 0.f, 1.f);
+	vec[2].pos = Vec3(0.5f, -0.5f, 0.5f);
 	vec[2].color = Vec4(0.f, 0.f, 1.f, 1.f);
-	mesh->Init(vec);
+
+	vec[3].pos = Vec3(0.5f, -0.5f, 0.5f);
+	vec[3].color = Vec4(0.f, 0.f, 1.f, 1.f);
+	vec[4].pos = Vec3(-0.5f, -0.5f, 0.5f);
+	vec[4].color = Vec4(0.f, 1.f, 0.f, 1.f);
+	vec[5].pos = Vec3(-0.5f, 0.5f, 0.5f);
+	vec[5].color = Vec4(1.f, 0.f, 0.f, 1.f);*/
+
+	vector<Vertex> vec(4);					//정점 버퍼
+	vec[0].pos = Vec3(-0.5f, 0.5f, 0.5f);
+	vec[0].color = Vec4(1.f, 0.f, 0.f, 1.f);
+	vec[1].pos = Vec3(0.5f, 0.5f, 0.5f);
+	vec[1].color = Vec4(0.f, 1.f, 0.f, 1.f);
+	vec[2].pos = Vec3(0.5f, -0.5f, 0.5f);
+	vec[2].color = Vec4(0.f, 0.f, 1.f, 1.f);
+	vec[3].pos = Vec3(-0.5f, -0.5f, 0.5f);
+	vec[3].color = Vec4(0.f, 1.f, 0.f, 1.f);
+
+	vector<uint32> indexVec;   //IndexBuffer에 사용할 인덱스
+	{
+		indexVec.push_back(0);
+		indexVec.push_back(1);
+		indexVec.push_back(2);
+	}
+	{
+		indexVec.push_back(0);
+		indexVec.push_back(2);
+		indexVec.push_back(3);
+	}
+
+	mesh->Init(vec, indexVec);
 
 	shader->Init(L"..\\Resources\\Shader\\default.hlsli");
 
-	GEngine->GetCmdQueue()->WaitSync();   //동기화를 기다려줌
+	GEngine->GetCmdQueue()->WaitSync();
 }
 
 void Game::Update()
@@ -32,17 +61,11 @@ void Game::Update()
 
 	{
 		Transform t;
-		t.offset = Vec4(0.75f, 0.f, 0.f, 0.f);
+		t.offset = Vec4(0.f, 0.f, 0.f, 0.f);
 		mesh->SetTransform(t);
 		mesh->Render();
 	}
 
-	{
-		Transform t;
-		t.offset = Vec4(0.f, 0.75f, 0.f, 0.f);
-		mesh->SetTransform(t);
-		mesh->Render();
-	}
 
 	mesh->Render();
 

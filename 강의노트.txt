@@ -234,15 +234,59 @@ SetGraphicsRootDescriptorTable 을 이용함.
 
 1.6 Index Buffer -----------------------------------------------------------------------------------------------------------------------
 
+전 시간에 삼각형을 그릴때 
+
+Game의 Init 에서 삼각형 정점으로 사용할 vector를 만들고
+엔진의 mesh의 init에 다가 정점 정보를 보내줬었음.
+하나의 삼각형 메쉬 정보만을 보내줬지만 두개의 삼각형을 만들 수 있었음.
+
+즉, 메시 정보는 하나만 있어도 여러개의 도형을 만들 수 있음.
+
+mesh의 init 함수에서는 매개변수로 들어온 vector<Vertex>& vec 을 이용해서
+
+DEVICE->CreateCommittedResource(
+		&heapProperty,
+		D3D12_HEAP_FLAG_NONE,
+		&desc,
+		D3D12_RESOURCE_STATE_GENERIC_READ,
+		nullptr,
+		IID_PPV_ARGS(&_vertexBuffer));		<- _vertexBuffer 만드는 부분
+
+VertexBuffer 를 만들고 
+
+	// Initialize the vertex buffer view.
+	_vertexBufferView.BufferLocation = _vertexBuffer->GetGPUVirtualAddress();
+	_vertexBufferView.StrideInBytes = sizeof(Vertex); // 정점 1개 크기
+	_vertexBufferView.SizeInBytes = bufferSize; // 버퍼의 크기	
+
+VertexBuffer View 라는 애를 만들었음.
+
+그다음에 Mehs::Render 함수에서
+
+CMD_LIST->IASetVertexBuffers(0, 1, &_vertexBufferView); // Slot: (0~15)
+
+이걸로 IA단계 (Input Assembly)에서 _vertexBufferView 이 버텍스 버퍼를 사용할 것이다를 알려줌.
+
+그다음
+CMD_LIST->DrawInstanced(_vertexCount, 1, 0, 0);	
+
+DrawInstanced로 Vertex View를 Input Assembly 단계에 밀어 넣게됨. 
+
+Vertex Buffer + Index Buffer => Input Assembly
+
+보통 버텍스 버퍼와 인덱스 버퍼를 같이 IA 단계에 넘겨줌.
+
+버텍스 버퍼는 실질적인 정점의 정보를 가지고 있고
+인덱스 버퍼는 버텍스 버퍼의 인덱스 정보만을 이용해서 정보를 보내줌.
+
+그러면 보내줄 데이터의 량이 확실히 줄어듬.
+
+
+1.7 Texture Mapping -----------------------------------------------------------------------------------------------------------------
 
 
 
-
-
-
-
-
-
+1.8 Depth Stencil View ----------------------------------------------------------------------------------------------------------------
 
 
 
