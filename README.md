@@ -1,4 +1,4 @@
-## 인프런 Rookiss 강의 DirectX12
+## 인프런 Rookiss 강의 DirectX12 (6/41)
 
 ### 1. DirectX12 초기화
   + 프로젝트 설정 :white_check_mark:
@@ -60,23 +60,6 @@
 ### 10. Mesh & Animation
   + Mesh
   + Animation
-  
-### 11. TEMP : 리뉴얼 강의 저장소
-  + 프로젝트 설정
-  + 버전 관리
-  + 장치 초기화
-  + 삼각형 띄우기
-  + Constant Buffer
-  + Root Signature
-  + Index Buffer
-  + Texture Mapping
-  + Depth Stencil View
-  + Input과 Timer
-  + Material
-  + Component
-  + Scene
-  + Camera
-  + Resources
 
 
 <br/>
